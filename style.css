@@ -1,0 +1,242 @@
+/* ---------------------------------------------------------------
+   Minimal academic homepage template
+   One serif family, one accent colour, generous whitespace.
+   Edit the custom properties below to retheme the whole site.
+------------------------------------------------------------------ */
+
+:root {
+  --bg:          #fbfaf7;
+  --ink:         #201e1b;
+  --ink-soft:    #6b6459;
+  --rule:        #e4e0d8;
+  --accent:      #2e4a5e;
+  --accent-soft: #4d6d82;
+
+  --measure: 40rem;      /* prose column width */
+  --gap-xl: 4rem;
+  --gap-l:  2.75rem;
+  --gap-m:  1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #17181a;
+    --ink:         #eae7e0;
+    --ink-soft:    #9b958a;
+    --rule:        #34322e;
+    --accent:      #8fb4c9;
+    --accent-soft: #a9c7d8;
+  }
+}
+
+/* Reset ----------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 { font-weight: 600; line-height: 1.15; margin: 0; }
+p, dl, ol, ul { margin: 0; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-color: currentColor; }
+
+a:focus-visible,
+.skip-link:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* Layout ------------------------------------------------------------ */
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 0.6em 1em;
+  border: 1px solid var(--rule);
+}
+.skip-link:focus {
+  left: 1.5rem;
+  top: 1rem;
+  z-index: 10;
+}
+
+/* Header -------------------------------------------------------------- */
+
+.site-header {
+  padding-top: var(--gap-xl);
+  padding-bottom: var(--gap-l);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--gap-xl);
+}
+
+.site-header h1 {
+  font-size: clamp(2rem, 1.7rem + 1.2vw, 2.75rem);
+  letter-spacing: -0.01em;
+}
+
+.site-header h1 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.role {
+  margin-top: 0.5rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+nav[aria-label="Primary"] {
+  margin-top: var(--gap-m);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+}
+
+nav[aria-label="Primary"] a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+nav[aria-label="Primary"] a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* Sections ------------------------------------------------------------- */
+
+.section {
+  margin-bottom: var(--gap-xl);
+  scroll-margin-top: 2rem;
+}
+
+.section h2 {
+  font-size: 1.2rem;
+  margin-bottom: var(--gap-m);
+}
+
+.section p { max-width: 34rem; }
+
+/* Research interests --------------------------------------------------- */
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+}
+
+.tag-list li {
+  position: relative;
+  padding-left: 1.1em;
+}
+.tag-list li::before {
+  content: "\2013"; /* en dash */
+  position: absolute;
+  left: 0;
+  color: var(--accent-soft);
+}
+
+/* Publications ------------------------------------------------------------ */
+
+.pub-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: none;
+}
+
+.pub-list li {
+  padding-block: var(--gap-m);
+  border-top: 1px solid var(--rule);
+}
+.pub-list li:first-child { border-top: none; padding-top: 0; }
+
+.pub-title { font-weight: 500; }
+
+.pub-meta {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.pub-links {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+/* Fact lists (teaching / contact) --------------------------------------- */
+
+.fact-list { display: grid; row-gap: var(--gap-m); }
+
+.fact {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  column-gap: 1.5rem;
+}
+
+.fact dt {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.fact dd { margin: 0; }
+
+.links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+
+@media (max-width: 26rem) {
+  .fact {
+    grid-template-columns: 1fr;
+    row-gap: 0.15rem;
+  }
+}
+
+/* Footer ------------------------------------------------------------------ */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding-block: var(--gap-l);
+}
+
+.site-footer p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
