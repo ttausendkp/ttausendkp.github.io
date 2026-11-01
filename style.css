@@ -240,3 +240,35 @@ nav[aria-label="Primary"] a:hover {
   color: var(--ink-soft);
   font-size: 0.9rem;
 }
+
+.about {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.portrait {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+/* On phones: photo on top, centered, text below */
+@media (max-width: 600px) {
+  .about {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .portrait {
+    width: 160px;
+  }
+}
