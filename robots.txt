@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ttausendkp.github.io/sitemap.xml
